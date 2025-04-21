@@ -1,4 +1,4 @@
-package hibernatedemo;
+package hibernatecruddemo;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
