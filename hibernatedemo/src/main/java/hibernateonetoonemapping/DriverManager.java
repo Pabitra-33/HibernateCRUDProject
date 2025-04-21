@@ -1,4 +1,4 @@
-package hibernatemap;
+package hibernateonetoonemapping;
 
 import java.util.Scanner;
 
@@ -47,5 +47,17 @@ public class DriverManager {
 		System.out.println("---Enter the Engine Details---");
 		System.out.println("Enter the engine id: ");
 		e1.setEid(sc.nextInt());
+		System.out.println("Enter the engine type: ");
+		e1.setEtype(sc.next());
+		System.out.println("Enter the engine cc: ");
+		e1.setCc(sc.nextInt());
+		
+		c1.setEngine(e1);
+		
+		//transaction management
+		et.begin();
+		em.persist(c1);//car object saved
+		em.persist(e1);//engine object saved
+		et.commit();//permanently saving the data in database
 	}
 }
