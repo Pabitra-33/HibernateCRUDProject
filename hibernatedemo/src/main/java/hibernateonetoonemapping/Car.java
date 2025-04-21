@@ -1,4 +1,4 @@
-package hibernatemap;
+package hibernateonetoonemapping;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,8 +10,9 @@ public class Car {
 	private int id;
 	private String model;
 	private int price;
+	
 	@OneToOne
-	private Engine engine;
+	private Engine engine;//HAS-A Relationship
 	
 	//getters and setters
 	public int getId() {
