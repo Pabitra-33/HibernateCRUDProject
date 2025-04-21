@@ -9,20 +9,21 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
+//implementation class
 public class StudentDriver {
-	private static EntityManagerFactory emf;
-	private static EntityManager em;
-	private static EntityTransaction et;
+	private static EntityManagerFactory emf;//Entity Manager Factory
+	private static EntityManager em;// Entity Manager
+	private static EntityTransaction et;//Entity Transaction
 	private static Scanner scn;
 	
 	static {
-		//entity manager factory
-		emf = Persistence.createEntityManagerFactory("girish");
+		//entity manager factory to connect to database
+		emf = Persistence.createEntityManagerFactory("girish");//providing the persistence unit name
 		
-		//entity manager
+		//entity manager to perform basic crud operations
 		em = emf.createEntityManager();
 		
-		//entity transaction
+		//entity transaction to perform transaction management
 		et = em.getTransaction();
 		
 		System.out.println(emf+" "+em+" "+et);
@@ -169,5 +170,6 @@ public class StudentDriver {
 	    	 System.out.println("Student name: "+student.getName());
 	    	 System.out.println("Student age: "+student.getAge());
 	    	 System.out.println("============================");
-	     }}
+	     }
+	  }
 }
