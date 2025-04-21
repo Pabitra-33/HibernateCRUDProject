@@ -1,4 +1,4 @@
-package hibernatemap;
+package hibernateonetoonemapping;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,7 +10,7 @@ public class Engine {
 	private String etype;
 	private int cc;
 	
-	
+	//getters and setters 
 	public int getEid() {
 		return eid;
 	}
