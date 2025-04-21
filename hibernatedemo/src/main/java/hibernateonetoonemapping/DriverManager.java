@@ -58,6 +58,7 @@ public class DriverManager {
 		et.begin();
 		em.persist(c1);//car object saved
 		em.persist(e1);//engine object saved
+		System.out.println("Data saved successfully..!!");
 		et.commit();//permanently saving the data in database
 	}
 }
