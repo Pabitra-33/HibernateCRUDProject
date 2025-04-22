@@ -21,7 +21,7 @@ public class DriverManager {
 	}
 	public static void main(String[] args) {
 		System.out.println("---:Welcome to Car Management Service:---");
-		System.out.println("1. Save\n2. Update\n3. Delete\n4. Get By Id\n5. Get All\n6. Exit");
+		System.out.println("1. Save\n2. FetchCarandEngine\n3. Delete Car\n4. Update Car\n5. DeleteCarandEngine\n6. DeleteEngine\n7. Exit");
 		System.out.println("Enter your choice: ");
 		sc = new Scanner(System.in);
 		int choice = sc.nextInt();
@@ -30,9 +30,27 @@ public class DriverManager {
 			case 1:
 				save();
 				break;
+			case 2:
+				fetchCarandEngine();
+				break;
+			case 3:
+				deleteCar();
+				break;
+			case 4:
+				updateCar();
+				break;
+			case 5:
+				deleteCarandEngine();
+				break;
+			case 6:
+				deleteEngine();
+				break;
+			default:
+				System.out.println("Enter a valid choice: ");
 		}
 	}
 	
+	//save data method
 	private static void save() {
 		Car c1 = new Car();//car object
 		System.out.println("---Enter The Car Details---");
@@ -60,5 +78,40 @@ public class DriverManager {
 		em.persist(e1);//engine object saved
 		System.out.println("Data saved successfully..!!");
 		et.commit();//permanently saving the data in database
+	}
+	
+	//fetch car and engine object
+	private static void fetchCarandEngine() {
+		Car c1 = new Car(); //car object
+		System.out.println("Enter the car id whose details you want: ");
+		c1.setId(sc.nextInt());//setting the user given id
+		
+		Car c2 = em.find(Car.class, c1.getId());
+		if(c2 != null) {
+			System.out.println("Car id is: "+c2.getId()+"\n"+"Car model is: "+c2.getModel()+"\n"+"Car price is: "+c2.getPrice());
+			
+			Engine e1 = c2.getEngine();
+			System.out.println("Engine id is: "+e1.getEid()+"\n"+"Engine type is: "+e1.getEtype()+"\n"+"Engine cc is: "+e1.getCc());
+		}
+	}
+	
+	private static void deleteEngine() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void deleteCarandEngine() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void updateCar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void deleteCar() {
+		// TODO Auto-generated method stub
+		
 	}
 }
