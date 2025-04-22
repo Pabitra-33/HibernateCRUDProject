@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Engine {
 	@Id
-	private int eid;
+	private int eid;//primary key of the table
 	private String etype;
 	private int cc;
 	
