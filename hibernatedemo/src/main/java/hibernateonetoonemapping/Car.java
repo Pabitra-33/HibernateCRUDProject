@@ -7,12 +7,12 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Car {
 	@Id
-	private int id;
+	private int id;//primary key for table
 	private String model;
 	private int price;
 	
 	@OneToOne
-	private Engine engine;//HAS-A Relationship
+	private Engine engine;//HAS-A Relationship to achieve relation of two class
 	
 	//getters and setters
 	public int getId() {
