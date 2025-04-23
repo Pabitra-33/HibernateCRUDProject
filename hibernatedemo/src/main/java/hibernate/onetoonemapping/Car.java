@@ -1,4 +1,4 @@
-package hibernateonetoonemapping;
+package hibernate.onetoonemapping;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
