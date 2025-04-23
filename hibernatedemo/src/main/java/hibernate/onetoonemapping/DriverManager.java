@@ -1,4 +1,4 @@
-package hibernateonetoonemapping;
+package hibernate.onetoonemapping;
 
 import java.util.Scanner;
 
@@ -96,8 +96,21 @@ public class DriverManager {
 	}
 	
 	private static void deleteEngine() {
-		// TODO Auto-generated method stub
+		Car c1 = new Car();
+		System.out.println("Enter the car id, whose engine you wants to delete..");
+		c1.setId(sc.nextInt());
 		
+		//find the car based on the id
+		Car c2 = em.find(Car.class, c1.getId());
+		if(c2 != null) {
+			Engine e1 = c2.getEngine();//get the engine
+			if(e1 != null) {
+				c2.setEngine(null);//setting the engine id to null
+				et.begin();
+				em.remove(e1);
+				et.commit();
+			}
+		}
 	}
 
 	private static void deleteCarandEngine() {
