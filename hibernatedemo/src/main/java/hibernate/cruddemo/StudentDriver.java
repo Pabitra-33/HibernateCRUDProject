@@ -1,4 +1,4 @@
-package hibernatecruddemo;
+package hibernate.cruddemo;
 
 import java.util.List;
 import java.util.Scanner;
