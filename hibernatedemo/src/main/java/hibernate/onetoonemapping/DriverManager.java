@@ -46,7 +46,7 @@ public class DriverManager {
 				deleteEngine();
 				break;
 			default:
-				System.out.println("Enter a valid choice: ");
+				System.out.println("Enter a valid choice..!");
 		}
 	}
 	
@@ -106,25 +106,60 @@ public class DriverManager {
 			Engine e1 = c2.getEngine();//get the engine
 			if(e1 != null) {
 				c2.setEngine(null);//setting the engine id to null
+				
 				et.begin();
 				em.remove(e1);
+				System.out.println("Engine deleted successfully!!");
 				et.commit();
 			}
 		}
 	}
 
 	private static void deleteCarandEngine() {
-		// TODO Auto-generated method stub
+		Car c1 = new Car();
+		System.out.println("Enter the car id whose record you wants to delete: ");
+		c1.setId(sc.nextInt());
 		
+		//find the car based on the id user given
+		Car c2 = em.find(Car.class, c1.getId());
+		if(c2 != null) {
+			//find the engine based on the instance
+			Engine e1 = c2.getEngine();
+			if(e1 != null) {
+				c2.setEngine(null);//set the engine to null, so that we can delete it
+				et.begin();
+				em.remove(e1);//deleting the engine
+				et.commit();
+			}
+			//deleting the car object
+			et.begin();
+			em.remove(c2);
+			System.out.println("Car and Engine objects deleted..");
+			et.commit();
+		}
 	}
 
 	private static void updateCar() {
-		// TODO Auto-generated method stub
+		Car c1 = new Car();
+		System.out.println("Enter the car id, you want to update: ");
+		c1.setId(sc.nextInt());
 		
+		//find the car present in database or not
+		Car c2 = em.find(Car.class, c1.getId());
+		if(c2 != null) {
+			System.out.println("Enter the car model you want to update: ");
+			c2.setModel(sc.next());
+			System.out.println("Enter the car price you want to update: ");
+			c2.setPrice(sc.nextInt());
+			
+			et.begin();
+			em.merge(c2);//updating the data
+			System.out.println("Car details updated...");
+			et.commit();
+		}
 	}
 
 	private static void deleteCar() {
-		// TODO Auto-generated method stub
 		
 	}
 }
