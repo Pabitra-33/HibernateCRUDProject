@@ -8,17 +8,20 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
 public class DriverManager {
-	private static EntityManagerFactory emf;
-	private static EntityManager em;
-	private static EntityTransaction et;
+	private static EntityManagerFactory emf;//for database connection
+	private static EntityManager em;//for crud operations
+	private static EntityTransaction et;//for transaction management
 	private static Scanner sc;
 	
+	//static block
 	static {
 		//performs three pre-requisite steps to perform operations in Hibernate
 		emf = Persistence.createEntityManagerFactory("girish");
 		em = emf.createEntityManager();
 		et = em.getTransaction();
 	}
+	
+	//main method
 	public static void main(String[] args) {
 		System.out.println("---:Welcome to Car Management Service:---");
 		System.out.println("1. Save\n2. FetchCarandEngine\n3. Delete Car\n4. Update Car\n5. DeleteCarandEngine\n6. DeleteEngine\n7. Exit");
@@ -160,6 +163,18 @@ public class DriverManager {
 	}
 
 	private static void deleteCar() {
+		Car c1 = new Car();
+		System.out.println("Enter the car id you wants to delete: ");
+		c1.setId(sc.nextInt());
 		
+		//find the car based on id
+		Car c2 = em.find(Car.class, c1.getId());
+		if(c2 != null) {
+			//begin transaction
+			et.begin();
+			em.remove(c2);//delete the car
+			System.out.println("Car deleted successfully..!");
+			et.commit();
+		}
 	}
 }
