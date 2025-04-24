@@ -1,5 +1,7 @@
 package hibernate.onetomanymapping;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import jakarta.persistence.EntityManager;
@@ -27,7 +29,7 @@ public class Driver {
 		
 		while(run) {
 			System.out.println("---:Welcome to Bank Management Service:---");
-			System.out.println("1. Save\n2. FetchAccounts\n3. FetchBankAndAccounts\n4. Update Bank\n5. Update Accounts\n6. Delete Bank \n7. Delete Accounts\n8. Exit");
+			System.out.println("1. Save\n2. FetchOneAccount\n3. FetchBankAndAccounts\n4. Update Bank\n5. Update Accounts\n6. Delete Bank \n7. Delete Accounts\n8. Exit");
 			System.out.println("Enter your choice: ");
 			sc = new Scanner(System.in);
 			int choice = sc.nextInt();
@@ -37,7 +39,7 @@ public class Driver {
 				saveBankandAccounts();
 				break;
 			case 2:
-				fetchAccounts();
+				fetchAnAccounts();
 				break;
 			case 3:
 				fetchBankandAccounts();
@@ -67,26 +69,98 @@ public class Driver {
 
 	private static void saveBankandAccounts() {
 		Bank b1 = new Bank();//bank object
-		System.out.println("Enter the Bank Details: ");
+		System.out.println("Enter the Bank Details:---");
+		System.out.println("Enter the bank id: ");
+		b1.setBid(sc.nextInt());
+		System.out.println("Enter the bank name: ");
+		b1.setBname(sc.next());
+		System.out.println("Enter the bank ifsc code: ");
+		b1.setIfsc(sc.next());
+		
+		Accounts a1 = new Accounts();
+		System.out.println("Enter the account details for first account:---");
+		System.out.println("Enter the account id: ");
+		a1.setAid(sc.nextInt());
+		System.out.println("Enter the account holder name: ");
+		a1.setAcname(sc.next());
+		System.out.println("Enter the account balance: ");
+		a1.setAcbalance(sc.nextInt());
+		
+		Accounts a2 = new Accounts();
+		System.out.println("Enter the account details for second account:---");
+		System.out.println("Enter the account id: ");
+		a2.setAid(sc.nextInt());
+		System.out.println("Enter the account holder name: ");
+		a2.setAcname(sc.next());
+		System.out.println("Enter the account balance: ");
+		a2.setAcbalance(sc.nextInt());
+		
+		//adding the list of accounts to a list
+		List<Accounts> accounts = new ArrayList<Accounts>();
+		accounts.add(a1);
+		accounts.add(a2);
+		
+		//now set the list of accounts data for the bank object
+		b1.setAccounts(accounts);
+		
+		//transaction management
+		et.begin();
+		em.persist(b1);
+		em.persist(a1);
+		em.persist(a2);
+		System.out.println("Data saved successfully...!");
+		et.commit();
 	}
 
-	private static void fetchAccounts() {
-		// TODO Auto-generated method stub
+	private static void fetchAnAccounts() {
+		Accounts a1 = new Accounts();
+		System.out.println("Enter the id whose data you want to fetch: ");
+		a1.setAid(sc.nextInt());
 		
+		Accounts a2 =  em.find(Accounts.class, a1.getAid());
+		if(a2 != null) {
+			System.out.println("Account id: "+a2.getAid()+"\n"+"Account holder name: "+a2.getAcname()+"\n"+"Account balance: "+a2.getAcbalance());
+		}
 	}
 
 	private static void fetchBankandAccounts() {
-		// TODO Auto-generated method stub
+		Bank b1 = new Bank();
+		System.out.println("Enter the bank id, whose records you want to fetch: ");
+		b1.setBid(sc.nextInt());
 		
+		Bank b2 = em.find(Bank.class, b1.getBid());
+		if(b2 != null) {
+			System.out.println("Bank id is: "+b2.getBid()+"\n"+"Bank name is: "+b2.getBname()+"\n"+"Bank ifsc code is: "+b2.getIfsc());
+			
+			//getting the list of accounts
+			List<Accounts> accounts = b2.getAccounts();
+			for(Accounts acc : accounts) {
+				System.out.println("Account id: "+acc.getAid()+"\n"+"Account holder name: "+acc.getAcname()+"\n"+"Account balance: "+acc.getAcbalance());
+			}
+		}
 	}
 
 	private static void updateBank() {
-		// TODO Auto-generated method stub
+		Bank b1 = new Bank();
+		System.out.println("Enter the bank id, whose records you want to update: ");
+		b1.setBid(sc.nextInt());
+		
+		Bank b2 = em.find(Bank.class, b1.getBid());
+		if(b2 != null) {
+			System.out.println("Enter the updated bank name: ");
+			b2.setBname(sc.next());
+			System.out.println("Enter the updated ifsc code: ");
+			b2.setIfsc(sc.next());
+			
+			et.begin();
+			em.merge(b2);
+			System.out.println("Bank Data updated...");
+			et.commit();
+		}
 		
 	}
 
 	private static void updateAccounts() {
-		// TODO Auto-generated method stub
 		
 	}
 
