@@ -114,7 +114,7 @@ public class Driver {
 
 	private static void fetchAnAccounts() {
 		Accounts a1 = new Accounts();
-		System.out.println("Enter the id whose data you want to fetch: ");
+		System.out.println("Enter the account id whose data you want to fetch: ");
 		a1.setAid(sc.nextInt());
 		
 		Accounts a2 =  em.find(Accounts.class, a1.getAid());
@@ -181,12 +181,35 @@ public class Driver {
 	}
 
 	private static void deleteBank() {
-		// TODO Auto-generated method stub
+		Bank b1 = new Bank();
+		System.out.println("Enter the bank id, whose data you want to delete: ");
+		b1.setBid(sc.nextInt());
 		
+		Bank b2 = em.find(Bank.class, b1.getBid());
+		if(b2 != null) {
+			et.begin();
+			em.remove(b2);
+			System.out.println("Bank deleted successfully...");
+			et.commit();
+		}
 	}
 
 	private static void deleteAccounts() {
-		// TODO Auto-generated method stub
+		Accounts a1 = new Accounts();
+		System.out.println("Enter the account id whose data you want to delete: ");
+		a1.setAid(sc.nextInt());
 		
+		Bank b1 = new Bank();
+		System.out.println("Enter the bank id, whose account you want to delete: ");
+		b1.setBid(sc.nextInt());
+		
+		if(b1 != null && a1 != null) {
+			b1.getAccounts().remove(a1);//removing the accounts from the list
+			
+			et.begin();
+			em.remove(a1);//deleting the accounts
+			System.out.println("Account data deleted successfully!!");
+			et.commit();
+		}
 	}
 }
