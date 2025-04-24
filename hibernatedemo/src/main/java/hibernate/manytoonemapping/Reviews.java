@@ -11,7 +11,7 @@ public class Reviews {
 	private String rTitle;
 	
 	@ManyToOne
-	private Product product;//HAS-A Relationship
+	private Product product;//HAS-A Relationship between two classes
 
 	//getters and setters
 	public int getrId() {
