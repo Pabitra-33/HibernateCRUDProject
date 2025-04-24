@@ -161,7 +161,23 @@ public class Driver {
 	}
 
 	private static void updateAccounts() {
+		Accounts a1 = new Accounts();
+		System.out.println("Enter the id whose data you want to update: ");
+		a1.setAid(sc.nextInt());
 		
+		Accounts a2 =  em.find(Accounts.class, a1.getAid());
+		if(a2 != null) {
+			System.out.println("Enter the updated account holder name: ");
+			a2.setAcname(sc.next());
+			System.out.println("Enter the updated account balance: ");
+			a2.setAcbalance(sc.nextInt());
+			
+			//transactions management
+			et.begin();
+			em.merge(a2);
+			System.out.println("Account data updated...");
+			et.commit();
+		}
 	}
 
 	private static void deleteBank() {
