@@ -2,7 +2,6 @@ package hibernate.manytoonemapping;
 
 import java.util.Scanner;
 
-import hibernate.onetomanymapping.Accounts;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -106,7 +105,23 @@ public class ReviewProductDriver {
 	}
 
 	private static void fetchProductandReviews() {
+		Reviews r1 = new Reviews();
+		System.out.println("Enter the reviews id, whose data you want to fetch: ");
+		r1.setrId(sc.nextInt());
 		
+		//find the reviews based on the id
+		Reviews r2 = em.find(Reviews.class, r1.getrId());
+		if(r2 != null) {
+			System.out.println("Reviews details:--- ");
+			System.out.println("Review id: "+r2.getrId()+"\n"+"Review title: "+r2.getrTitle());
+			
+			//get the product id from review id
+			Product p1 = r2.getProduct();
+			if(p1 != null) {
+				System.out.println("Product details:--- ");
+				System.out.println("Product id: "+p1.getpId()+"\n"+"Product name: "+p1.getpName()+"\n"+"Product price: "+p1.getpPrice());
+			}
+		}
 	}
 
 	private static void assignReviewsToExistingProduct() {
