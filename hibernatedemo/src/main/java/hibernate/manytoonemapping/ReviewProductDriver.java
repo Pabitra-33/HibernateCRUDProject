@@ -160,8 +160,25 @@ public class ReviewProductDriver {
 	}
 
 	private static void updateProduct() {
-		// TODO Auto-generated method stub
+		Product p1 = new Product();//product object
+		System.out.println("Enter the product id, for which you want to update: ");
+		p1.setpId(sc.nextInt());
 		
+		//find the product based on id user given
+		Product p2 = em.find(Product.class, p1.getpId());
+		if(p2 != null) {
+			sc.nextLine();
+			System.out.println("Enter the updated product name: ");
+			p2.setpName(sc.nextLine());
+			System.out.println("Enter the updated product price: ");
+			p2.setpPrice(sc.nextInt());
+			
+			//transactions management
+			et.begin();
+			em.merge(p2);//updated the product details
+			System.out.println("Product data updated!!");
+			et.commit();
+		}
 	}
 
 	private static void updateReviews() {
