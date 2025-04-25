@@ -125,8 +125,38 @@ public class ReviewProductDriver {
 	}
 
 	private static void assignReviewsToExistingProduct() {
-		// TODO Auto-generated method stub
+		Product p1 = new Product();//product object
+		System.out.println("Enter the product id, for which you will add reviews: ");
+		p1.setpId(sc.nextInt());
 		
+		//find the product based on id user given
+		Product p2 = em.find(Product.class, p1.getpId());
+		if(p2 != null) {
+			//create reviews objects
+			Reviews r1 = new Reviews();
+			System.out.println("Enter the first review id: ");
+			r1.setrId(sc.nextInt());
+			sc.nextLine();
+			System.out.println("Enter the first review title: ");
+			r1.setrTitle(sc.nextLine());
+			r1.setProduct(p2);
+			
+			Reviews r2 = new Reviews();
+			System.out.println("Enter the second review id: ");
+			r2.setrId(sc.nextInt());
+			sc.nextLine();
+			System.out.println("Enter the second review title: ");
+			r2.setrTitle(sc.nextLine());
+			r2.setProduct(p2);
+			
+			//transaction
+			et.begin();
+			em.persist(p1);//no need as this data is already present in db.
+			em.persist(r1);
+			em.persist(r2);
+			System.out.println("New review data assigned to existing product..");
+			et.commit();
+		}
 	}
 
 	private static void updateProduct() {
