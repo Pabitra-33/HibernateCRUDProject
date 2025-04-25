@@ -182,17 +182,31 @@ public class ReviewProductDriver {
 	}
 
 	private static void updateReviews() {
-		// TODO Auto-generated method stub
+		Reviews r1 = new Reviews();
+		System.out.println("Enter the reviews id, whose data you want to update: ");
+		r1.setrId(sc.nextInt());
 		
+		//find the reviews based on the id
+		Reviews r2 = em.find(Reviews.class, r1.getrId());
+		if(r2 != null) {
+			sc.nextLine();
+			System.out.println("Enter the updated review title: ");
+			r2.setrTitle(sc.nextLine());
+			
+			//transactions
+			et.begin();
+			em.merge(r2);
+			System.out.println("Reviews data updated...");
+			et.commit();
+		}
 	}
 
 	private static void deleteProduct() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	private static void deleteReviews() {
-		// TODO Auto-generated method stub
+		//deleting the reviews independently
 		
 	}
 }
