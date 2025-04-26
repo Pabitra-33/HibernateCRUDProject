@@ -202,7 +202,17 @@ public class ReviewProductDriver {
 	}
 
 	private static void deleteProduct() {
+		Product p1 = new Product();
+		System.out.println("Enter the product id, you want to delete: ");
+		p1.setpId(sc.nextInt());
 		
+		Product p2 = em.find(Product.class, p1.getpId());
+		if(p2 != null) {
+			et.begin();
+			em.remove(p2);
+			System.out.println("Product data deleted successfully!");
+			et.commit();
+		}
 	}
 
 	private static void deleteReviews() {
