@@ -56,12 +56,12 @@ public class ReviewProductDriver {
 				deleteReviews();
 				break;
 			case 8:
-				System.out.println("Exiting the application...!");
+				System.out.println("Exiting the application. Thank you:)");
 				run = false;
 				break;
 
 			default:
-				System.out.println("Enter a valid choice: ");
+				System.out.println("Enter a valid choice:(");
 			}
 		}
 	}
@@ -112,13 +112,15 @@ public class ReviewProductDriver {
 		//find the reviews based on the id
 		Reviews r2 = em.find(Reviews.class, r1.getrId());
 		if(r2 != null) {
-			System.out.println("Reviews details:--- ");
+			System.out.println("Reviews details: ");
+			System.out.println("----------------");
 			System.out.println("Review id: "+r2.getrId()+"\n"+"Review title: "+r2.getrTitle());
 			
 			//get the product id from review id
 			Product p1 = r2.getProduct();
 			if(p1 != null) {
-				System.out.println("Product details:--- ");
+				System.out.println("Product details: ");
+				System.out.println("----------------");
 				System.out.println("Product id: "+p1.getpId()+"\n"+"Product name: "+p1.getpName()+"\n"+"Product price: "+p1.getpPrice());
 			}
 		}
@@ -151,7 +153,7 @@ public class ReviewProductDriver {
 			
 			//transaction
 			et.begin();
-			em.persist(p1);//no need as this data is already present in db.
+			em.persist(p2);//no need as this data is already present in db.
 			em.persist(r1);
 			em.persist(r2);
 			System.out.println("New review data assigned to existing product..");
@@ -202,12 +204,26 @@ public class ReviewProductDriver {
 	}
 
 	private static void deleteProduct() {
+		Reviews r1 = new Reviews();
+		System.out.println("Enter the first review id, whose product you want to delete: ");
+		r1.setrId(sc.nextInt());
+		
+		Reviews r2 = new Reviews();
+		System.out.println("Enter the second review id, whose product you want to delete: ");
+		r2.setrId(sc.nextInt());
+		
 		Product p1 = new Product();
-		System.out.println("Enter the product id, you want to delete: ");
+		System.out.println("Enter the product id, which you want to delete: ");
 		p1.setpId(sc.nextInt());
 		
 		Product p2 = em.find(Product.class, p1.getpId());
-		if(p2 != null) {
+		Reviews r3 = em.find(Reviews.class, r1.getrId());
+		Reviews r4 = em.find(Reviews.class, r2.getrId());
+		if(r3 != null && r4 != null && p2 != null) {
+			//get the product for the corresponding review id
+			r3.setProduct(null);
+			r4.setProduct(null);
+			
 			et.begin();
 			em.remove(p2);
 			System.out.println("Product data deleted successfully!");
@@ -216,7 +232,18 @@ public class ReviewProductDriver {
 	}
 
 	private static void deleteReviews() {
-		//deleting the reviews independently
+		Reviews r1 = new Reviews();
+		System.out.println("Enter the review id, whose data you want to delete: ");
+		r1.setrId(sc.nextInt());
 		
+		Reviews r2 = em.find(Reviews.class, r1.getrId());
+		if(r2 != null) {
+			
+			//transaction management
+			et.begin();
+			em.remove(r2);//deleted the review
+			System.out.println("Review deleted successfully!!..");
+			et.commit();
+		}
 	}
 }
