@@ -58,7 +58,7 @@ public class DriverManyMapping {
 					deleteStudents();
 					break;
 				case 8:
-					System.out.println("Exiting the application...!");
+					System.out.println("Exiting the application. Thank You.!");
 					run = false;
 					break;
 
@@ -141,27 +141,124 @@ public class DriverManyMapping {
 		}
 
 		private static void assignStudentsToExistingSubjects() {
-			// TODO Auto-generated method stub
+			//creating a new student object
+			Students st1 = new Students();
+			System.out.println("Insert new student data, to existing subjects: ");
+			System.out.println("Enter student id: ");
+			st1.setStid(sc.nextInt());
+			sc.nextLine();
+			System.out.println("Enter student name: ");
+			st1.setStname(sc.nextLine());
+			System.out.println("Enter student age: ");
+			st1.setStage(sc.nextInt());
 			
+			Subjects sub = new Subjects();
+			System.out.println("Enter first subject id, whose data you want: ");
+			sub.setSid(sc.nextInt());
+			Subjects sub1 = em.find(Subjects.class, sub.getSid());
+			
+			System.out.println("Enter second subject id, whose data you want: ");
+			sub.setSid(sc.nextInt());
+			Subjects sub2 = em.find(Subjects.class, sub.getSid());
+			if(sub1 != null && sub2 != null) {
+				List<Subjects> subs = new ArrayList<Subjects>();
+				subs.add(sub1);
+				subs.add(sub2);
+				
+				st1.setSubjects(subs);
+				
+				//transactions
+				et.begin();
+				em.persist(st1);//saving the new student data
+				System.out.println("New Student data added...");
+				et.commit();
+			}
 		}
 
 		private static void updateSubjects() {
-			// TODO Auto-generated method stub
+			//creating subject object
+			Subjects sub1 = new Subjects();
+			System.out.println("Enter the subject id whose data you want to update: ");
+			sub1.setSid(sc.nextInt());
 			
+			Subjects sub2 = em.find(Subjects.class, sub1.getSid());
+			if(sub2 != null) {
+				System.out.println("Insert the updated subject data:---");
+				sc.nextLine();
+				System.out.println("Enter subject name: ");
+				sub2.setSname(sc.nextLine());
+				System.out.println("Enter time to complete it: ");
+				sub2.setDays(sc.nextInt());
+				
+				//transactions
+				et.begin();
+				em.merge(sub2);
+				System.out.println("Subject data updated...");
+				et.commit();
+			}
 		}
 
 		private static void updateStudents() {
-			// TODO Auto-generated method stub
+			//creating students object
+			Students st1 = new Students();
+			System.out.println("Enter the student id whose data you want to update: ");
+			st1.setStid(sc.nextInt());
 			
+			Students st2 = em.find(Students.class, st1.getStid());
+			if(st2 != null) {
+				System.out.println("Insert the updated student data:---");
+				sc.nextLine();
+				System.out.println("Enter students name: ");
+				st2.setStname(sc.nextLine());
+				System.out.println("Enter student age: ");
+				st2.setStage(sc.nextInt());
+				
+				//transactions
+				et.begin();
+				em.merge(st2);
+				System.out.println("Students data updated...");
+				et.commit();
+			}
 		}
 
 		private static void deleteSubjects() {
-			// TODO Auto-generated method stub
+			//creating subject object
+			Subjects sub1 = new Subjects();
+			System.out.println("Enter the subject id whose data you want to delete: ");
+			sub1.setSid(sc.nextInt());
 			
+			Students st1 = new Students();
+			System.out.println("Enter the Student id, whose subject you wants to remove");
+			st1.setStid(sc.nextInt());
+			
+			Students st2 = em.find(Students.class, st1.getStid());
+			if(st2 != null) {
+				//get the st2, subject and make it null
+				st2.setSubjects(null);
+				//st2.getSubjects().remove(sub1);
+				
+				//transactions
+				et.begin();
+				em.merge(sub1);
+				System.out.println("Subject data deleted...");
+				et.commit();
+			}
 		}
 
 		private static void deleteStudents() {
-			// TODO Auto-generated method stub
+			//creating students object
+			Students st1 = new Students();
+			System.out.println("Enter the student id whose data you want to delete: ");
+			st1.setStid(sc.nextInt());
 			
+			Students st2 = em.find(Students.class, st1.getStid());
+			if(st2 != null) {
+				
+				//transactions
+				et.begin();
+				em.remove(st2);
+				System.out.println("Students data deleted...");
+				et.commit();
+			}
 		}
 }
