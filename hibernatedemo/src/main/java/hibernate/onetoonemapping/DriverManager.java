@@ -27,7 +27,7 @@ public class DriverManager {
 		
 		while(run) {
 			System.out.println("---:Welcome to Car Management Service:---");
-			System.out.println("1. Save\n2. FetchCarandEngine\n3. Delete Car\n4. Update Car\n5. DeleteCarandEngine\n6. DeleteEngine\n7. Exit");
+			System.out.println("1. SaveCarandEngine\n2. FetchCarandEngine\n3. Delete Car\n4. Update Car\n5. DeleteCarandEngine\n6. DeleteEngine\n7. Exit");
 			System.out.println("Enter your choice: ");
 			sc = new Scanner(System.in);
 			int choice = sc.nextInt();
@@ -50,6 +50,10 @@ public class DriverManager {
 					break;
 				case 6:
 					deleteEngine();
+					break;
+				case 7:
+					System.out.println("Exiting the application...!");
+					run = false;
 					break;
 				default:
 					System.out.println("Enter a valid choice..!");
