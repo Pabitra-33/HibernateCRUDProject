@@ -23,38 +23,42 @@ public class DriverManager {
 	
 	//main method
 	public static void main(String[] args) {
-		System.out.println("---:Welcome to Car Management Service:---");
-		System.out.println("1. Save\n2. FetchCarandEngine\n3. Delete Car\n4. Update Car\n5. DeleteCarandEngine\n6. DeleteEngine\n7. Exit");
-		System.out.println("Enter your choice: ");
-		sc = new Scanner(System.in);
-		int choice = sc.nextInt();
+		boolean run = true;
 		
-		switch(choice) {
-			case 1:
-				save();
-				break;
-			case 2:
-				fetchCarandEngine();
-				break;
-			case 3:
-				deleteCar();
-				break;
-			case 4:
-				updateCar();
-				break;
-			case 5:
-				deleteCarandEngine();
-				break;
-			case 6:
-				deleteEngine();
-				break;
-			default:
-				System.out.println("Enter a valid choice..!");
+		while(run) {
+			System.out.println("---:Welcome to Car Management Service:---");
+			System.out.println("1. Save\n2. FetchCarandEngine\n3. Delete Car\n4. Update Car\n5. DeleteCarandEngine\n6. DeleteEngine\n7. Exit");
+			System.out.println("Enter your choice: ");
+			sc = new Scanner(System.in);
+			int choice = sc.nextInt();
+			
+			switch(choice) {
+				case 1:
+					saveCarandEngine();
+					break;
+				case 2:
+					fetchCarandEngine();
+					break;
+				case 3:
+					deleteCar();
+					break;
+				case 4:
+					updateCar();
+					break;
+				case 5:
+					deleteCarandEngine();
+					break;
+				case 6:
+					deleteEngine();
+					break;
+				default:
+					System.out.println("Enter a valid choice..!");
+			}
 		}
 	}
 	
 	//save data method
-	private static void save() {
+	private static void saveCarandEngine() {
 		Car c1 = new Car();//car object
 		System.out.println("---Enter The Car Details---");
 		System.out.println("Enter the car id: ");
@@ -64,7 +68,7 @@ public class DriverManager {
 		System.out.println("Enter the car price: ");
 		c1.setPrice(sc.nextInt());
 		
-		Engine e1 = new Engine();
+		Engine e1 = new Engine();//engine object
 		System.out.println("---Enter the Engine Details---");
 		System.out.println("Enter the engine id: ");
 		e1.setEid(sc.nextInt());
