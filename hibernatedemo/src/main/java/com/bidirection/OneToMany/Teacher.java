@@ -15,7 +15,7 @@ public class Teacher {
 	private String tdept;
 	
 	@OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
-	private List<Students> students;
+	private List<Childrens> childrens;
 
 	//generate getters and setters
 	public int getTid() {
@@ -42,11 +42,11 @@ public class Teacher {
 		this.tdept = tdept;
 	}
 
-	public List<Students> getStudents() {
-		return students;
+	public List<Childrens> getChildrens() {
+		return childrens;
 	}
 
-	public void setStudents(List<Students> students) {
-		this.students = students;
+	public void setChildrens(List<Childrens> childrens) {
+		this.childrens = childrens;
 	}
 }
