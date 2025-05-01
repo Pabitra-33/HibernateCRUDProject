@@ -5,38 +5,38 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Students {
-	private int sid;
-	private String sname;
-	private int age;
+public class Childrens {
+	private int cid;
+	private String cname;
+	private int cage;
 	
 	@ManyToOne
 	@JoinColumn(name = "teacher_id")
 	private Teacher teacher;
 
 	//getters and setters
-	public int getSid() {
-		return sid;
+	public int getCid() {
+		return cid;
 	}
 
-	public void setSid(int sid) {
-		this.sid = sid;
+	public void setCid(int cid) {
+		this.cid = cid;
 	}
 
-	public String getSname() {
-		return sname;
+	public String getCname() {
+		return cname;
 	}
 
-	public void setSname(String sname) {
-		this.sname = sname;
+	public void setCname(String cname) {
+		this.cname = cname;
 	}
 
-	public int getAge() {
-		return age;
+	public int getCage() {
+		return cage;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setCage(int cage) {
+		this.cage = cage;
 	}
 
 	public Teacher getTeacher() {
