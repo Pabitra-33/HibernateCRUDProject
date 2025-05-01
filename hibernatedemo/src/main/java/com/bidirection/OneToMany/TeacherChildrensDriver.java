@@ -179,7 +179,7 @@ public class TeacherChildrensDriver {
 				//iterate and find the child
 				for (Childrens childrens : childs) {
 					//if id matches with the user given id
-					if(childrens.getCid() == 301) {
+					if(childrens.getCid() == 302) {
 						System.out.println("Enter the updated children details: ");
 						sc.nextLine();
 						System.out.println("Enter the children name: ");
@@ -200,8 +200,21 @@ public class TeacherChildrensDriver {
 	}
 
 	private static void deleteTeacherandChildrens() {
-		// TODO Auto-generated method stub
+		//teacher object
+		Teacher t1 = new Teacher();
+		System.out.println("Enter the techer id, whose data you want to delete: ");
+		t1.setTid(sc.nextInt());
 		
+		//find the teacher
+		Teacher t2 = em.find(Teacher.class, t1.getTid());
+		if(t2 != null) {
+			
+			//transactions
+			et.begin();
+			em.remove(t2);
+			System.out.println("Techer and associated children's data deleted...!");
+			et.commit();
+		}
 	}
 
 	private static void deleteChildren() {
