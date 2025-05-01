@@ -218,7 +218,6 @@ public class TeacherChildrensDriver {
 	}
 
 	private static void deleteChildren() {
-		// TODO Auto-generated method stub
 		
 	}
 }
