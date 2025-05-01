@@ -1,11 +1,13 @@
 package com.bidirection.OneToMany;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Childrens {
+	@Id
 	private int cid;
 	private String cname;
 	private int cage;
