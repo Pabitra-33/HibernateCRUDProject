@@ -238,6 +238,7 @@ public class TeacherChildrensDriver {
 			//get the children
 			t2.getChildrens().remove(ch2);//removing that child from the list
 			
+			//transaction using hibernate
 			et.begin();
 			em.merge(t2);
 			em.remove(ch2);
