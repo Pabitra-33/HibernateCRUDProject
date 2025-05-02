@@ -218,6 +218,31 @@ public class TeacherChildrensDriver {
 	}
 
 	private static void deleteChildren() {
+		//teacher object
+		Teacher t1 = new Teacher();
+		System.out.println("Enter the techer id, whose data you want to delete: ");
+		t1.setTid(sc.nextInt());
 		
+		//Children object
+		Childrens ch1 = new Childrens();
+		System.out.println("Enter the children id, whose data you want to delete: ");
+		ch1.setCid(sc.nextInt());
+		
+		//find the teacher
+		Teacher t2 = em.find(Teacher.class, t1.getTid());
+		
+		//find the children
+		Childrens ch2 = em.find(Childrens.class, ch1.getCid());
+		
+		if(t2 != null & ch2 != null) {
+			//get the children
+			t2.getChildrens().remove(ch2);//removing that child from the list
+			
+			et.begin();
+			em.merge(t2);
+			em.remove(ch2);
+			System.out.println("Children data deleted...!");
+			et.commit();
+		}
 	}
 }
