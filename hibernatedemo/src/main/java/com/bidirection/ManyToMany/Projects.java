@@ -16,6 +16,7 @@ public class Projects {
 	@ManyToMany(mappedBy = "projects")
 	private List<Employees> employees;
 
+	
 	//getters and setters
 	public int getProjectId() {
 		return projectId;
