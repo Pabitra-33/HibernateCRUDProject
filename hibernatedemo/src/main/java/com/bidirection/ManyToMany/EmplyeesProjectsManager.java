@@ -19,4 +19,8 @@ public class EmplyeesProjectsManager {
 		em = emf.createEntityManager();
 		et = em.getTransaction();
 	}
+	
+	public static void main(String[] args) {
+		
+	}
 }
