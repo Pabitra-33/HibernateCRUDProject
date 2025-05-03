@@ -20,6 +20,7 @@ public class Employees {
 	@JoinTable(joinColumns = @JoinColumn(name = "employee_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
 	private List<Projects> projects;
 
+	
 	//getters and setters
 	public int getEmpId() {
 		return empId;
