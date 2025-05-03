@@ -129,6 +129,7 @@ public class TeacherChildrensDriver {
 			//children's data
 			List<Childrens> chList = t2.getChildrens();
 			for (Childrens childrens : chList) {
+				System.out.println();
 				System.out.println("Children's Details: ");
 				System.out.println("--------------");
 				System.out.println("Children id: "+childrens.getCid()+"\n"+"Children name: "+childrens.getCname()+"\n"+"Children age: "+childrens.getCage());
