@@ -12,7 +12,7 @@ import jakarta.persistence.Persistence;
 //driver implementation class
 public class EmplyeesProjectsManager {
 	private static EntityManagerFactory emf; //for database connection
-	private static static EntityManager em; //for CRUD operations
+	private static EntityManager em; //for CRUD operations
 	private static EntityTransaction et; //for transaction management
 	private static Scanner sc; //for user input
 	
@@ -138,6 +138,4 @@ public class EmplyeesProjectsManager {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
 }
