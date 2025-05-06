@@ -148,14 +148,18 @@ public class EmplyeesProjectsManager {
 	}
 
 	private static void deleteProjects() {
-		Employees emp1 = em.find(Employees.class, 1);
 		Projects proj1 = em.find(Projects.class, 102);
 		
-		if(emp1 != null & proj1 != null) {
-			emp1.getProjects().remove(proj1);
+		if(proj1 != null) {
+			List<Employees> emplist = proj1.getEmployees();
 			
+			if(emplist != null) {
+				for (Employees employees : emplist) {
+					employees.getProjects().remove(proj1);
+				}
+			}
 			et.begin();
-			em.merge(proj1);
+			em.remove(proj1);
 			System.out.println("Project deleted...");
 			et.commit();
 		}
