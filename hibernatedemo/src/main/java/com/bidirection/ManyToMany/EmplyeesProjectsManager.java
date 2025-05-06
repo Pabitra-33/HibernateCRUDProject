@@ -124,6 +124,7 @@ public class EmplyeesProjectsManager {
 			List<Projects> projlist = e1.getProjects();
 			if(projlist != null) {
 				for (Projects projects : projlist) {
+					System.out.println("------:Project details:------");
 					System.out.println("Project id: "+projects.getProjectId()+"\n"+"Project name: "+projects.getProjectName()+"\n"+"Project time duration: "+projects.getCompletionDays());
 					System.out.println("------------------");
 				}
@@ -154,7 +155,7 @@ public class EmplyeesProjectsManager {
 			emp1.getProjects().remove(proj1);
 			
 			et.begin();
-			em.merge(emp1);
+			em.merge(proj1);
 			System.out.println("Project deleted...");
 			et.commit();
 		}
