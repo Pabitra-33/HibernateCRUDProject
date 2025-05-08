@@ -3,12 +3,15 @@ package com.bidirection.ManyToMany;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Projects {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int projectId;
 	private String projectName;
 	private int CompletionDays;
