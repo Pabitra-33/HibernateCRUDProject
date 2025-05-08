@@ -1,6 +1,7 @@
 package hibernate.onetoonemapping;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
@@ -11,7 +12,7 @@ public class Car {
 	private String model;
 	private int price;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private Engine engine;//HAS-A Relationship to achieve relation of two class
 	
 	//getters and setters
